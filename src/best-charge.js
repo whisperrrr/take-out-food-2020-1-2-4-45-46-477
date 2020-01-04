@@ -25,7 +25,7 @@ function bestCharge(selectedItems) {
   ${resultItemStr}
   -------------------------------------------
   ${useDiscountStr(halfDiscountCharge,overDiscountCharge)}
-  总计：${chargeDiscount}
+  总计：${chargeDiscount}元
   ==========================================
   `
   return resultStr;

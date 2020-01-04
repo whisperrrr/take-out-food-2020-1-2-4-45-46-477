@@ -52,16 +52,26 @@ function showAllPromotions(itemsPromotionsData) {
   }
   itemsPromotionsCard.appendChild(itemsPromotionLists);
 }
+//展示最后的账单明细
 function calculatePrice() {
-  //先把用户选好后的条目转化成["ITEM0001 x 1", "ITEM0013 x 2", "ITEM0022 x 1"]
-  
-  //用best-charge()返回显示字符串
+  let selectedItems = getChoosedItem();
   let showBill = bestCharge(selectedItems);
   itemsShowCard.innerHTML = showBill;
 }
-
 function clearHistory() {
-  // 清除用户的选择，以及页面显示的信息
-  // 清除之后，用户可以继续正常使用各项功能
   window.location.reload();
+}
+//把用户选好后的条目转化成["ITEM0001 x 1", "ITEM0013 x 2", "ITEM0022 x 1"]
+function getChoosedItem() {
+  let result = [];
+  let itemsLi = document.getElementsByTagName("span");
+  let itemsLiLength = itemsLi.length;
+  for (let i = 0; i < itemsLiLength; i++) {
+    let itemsLiCount = itemsLi[i].innerHTML;
+    if (itemsLiCount !== "0") {
+      let ChoosedItemStr = itemsData[i].id + " x " + itemsLiCount;
+      result.push(ChoosedItemStr);
+    }
+  }
+  return result;
 }
