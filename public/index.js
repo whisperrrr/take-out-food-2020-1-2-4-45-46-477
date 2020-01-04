@@ -1,28 +1,43 @@
-// 请把与index.html页面相关的javascript代码写在这里
-// 同时删除该注释
-let itemsListCard = document.getElementById("items");
-let itemsLists = document.createElement("ul");
-let itemsInfo = loadAllItems();
-itemsListCard.appendChild(itemsLists);
-showAllItems(itemsInfo);
 
+let itemsListCard = document.getElementById("items");
+let itemsPromotionsCard = document.getElementById("promotions");
+let itemsData = loadAllItems();
+let itemsPromotionsData = loadPromotions();
+showAllItems(itemsData);
+showAllPromotions(itemsPromotionsData);
 //展示所有菜品信息
-function showAllItems(itemsInfo) {
-  let itemsLength = itemsInfo.length;
+function showAllItems(itemsData) {
+  let itemsLists = document.createElement("ul");
+  let itemsLength = itemsData.length;
   for (let i = 0; i < itemsLength; i++) {
     let newItemsList = document.createElement("li");
     let itemsCount = 0;
     newItemsList.innerHTML = `
-      名称：${itemsInfo[i].name} 
-      单价：${itemsInfo[i].price}
+      名称：${itemsData[i].name} 
+      单价：${itemsData[i].price}
+      数量：
       <input type="button" value="+" />
       ${itemsCount}
       <input type="button" value="-" />
     `
     itemsLists.appendChild(newItemsList);  
   }
+  itemsListCard.appendChild(itemsLists);
 }
-
+//展示所有优惠信息
+function showAllPromotions(itemsPromotionsData) {
+  let itemsPromotionLists = document.createElement("ul");
+  let itemsPromotionsLength = itemsPromotionsData.length;
+  for (let i = 0; i < itemsPromotionsLength; i++) {
+    let newPromotion = document.createElement("li");
+    newPromotion.innerHTML = `
+      ${itemsPromotionsData[i].type}
+      ${itemsPromotionsData[i].items || ""}
+    `
+    itemsPromotionLists.appendChild(newPromotion);
+  }
+  itemsPromotionsCard.appendChild(itemsPromotionLists);
+}
 function calculatePrice() {
   // 想办法调用`bestCharge`并且把返回的字符串
   // 显示在html页面的`message`中
