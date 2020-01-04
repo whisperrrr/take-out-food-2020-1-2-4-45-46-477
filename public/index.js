@@ -5,6 +5,19 @@ let itemsData = loadAllItems();
 let itemsPromotionsData = loadPromotions();
 showAllItems(itemsData);
 showAllPromotions(itemsPromotionsData);
+//给itemsListCard添加点击事件监听函数,改变点餐数量
+itemsListCard.addEventListener("click",changeItemCount);
+//改变点餐数量
+function changeItemCount(event) {
+  let clickedBtn = event.target;
+  let clickedBtnNext = clickedBtn.nextElementSibling;
+  let clickedBtnPre = clickedBtn.previousElementSibling;
+  if (clickedBtn.value === "+") {
+    clickedBtnNext.innerHTML = parseInt(clickedBtnNext.innerHTML) + 1;
+  } else if (clickedBtn.value === "-") {
+    clickedBtnPre.innerHTML = parseInt(clickedBtnPre.innerHTML) - 1;
+  }
+}
 //展示所有菜品信息
 function showAllItems(itemsData) {
   let itemsLists = document.createElement("ul");
@@ -17,7 +30,7 @@ function showAllItems(itemsData) {
       单价：${itemsData[i].price}
       数量：
       <input type="button" value="+" />
-      ${itemsCount}
+      <span>${itemsCount}</span>
       <input type="button" value="-" />
     `
     itemsLists.appendChild(newItemsList);  
