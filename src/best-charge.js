@@ -47,13 +47,11 @@ function useDiscountStr(half,over) {
   if (half === 0 && over === 0) {
     return ""
   } else if(over >= half) {
-    result = `
-  使用优惠：
+    result = `使用优惠：
   满30减6元，省${over}元
   ------------------------------------------` 
   } else {
-    result = `
-  使用优惠：
+    result = `使用优惠：
   指定菜品半价（黄焖鸡，凉皮），省${half}元
   -------------------------------------------`
   }
